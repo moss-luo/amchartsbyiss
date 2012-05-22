@@ -30,6 +30,78 @@
                 value: 10
             }];
 
+       	 var columnChart;
+
+         var columnData = [{
+             country: "USA",
+             visits: 4025,
+             color: "#FF0F00"
+         }, {
+             country: "China",
+             visits: 1882,
+             color: "#FF6600"
+         }, {
+             country: "Japan",
+             visits: 1809,
+             color: "#FF9E01"
+         }, {
+             country: "Germany",
+             visits: 1322,
+             color: "#FCD202"
+         }, {
+             country: "UK",
+             visits: 1122,
+             color: "#F8FF01"
+         }, {
+             country: "France",
+             visits: 1114,
+             color: "#B0DE09"
+         }, {
+             country: "India",
+             visits: 984,
+             color: "#04D215"
+         }, {
+             country: "Spain",
+             visits: 711,
+             color: "#0D8ECF"
+         }, {
+             country: "Netherlands",
+             visits: 665,
+             color: "#0D52D1"
+         }, {
+             country: "Russia",
+             visits: 580,
+             color: "#2A0CD0"
+         }, {
+             country: "South Korea",
+             visits: 443,
+             color: "#8A0CCF"
+         }, {
+             country: "Canada",
+             visits: 441,
+             color: "#CD0D74"
+         }, {
+             country: "Brazil",
+             visits: 395,
+             color: "#754DEB"
+         }, {
+             country: "Italy",
+             visits: 386,
+             color: "#DDDDDD"
+         }, {
+             country: "Australia",
+             visits: 384,
+             color: "#999999"
+         }, {
+             country: "Taiwan",
+             visits: 338,
+             color: "#333333"
+         }, {
+             country: "Poland",
+             visits: 328,
+             color: "#000000"
+         }];
+
             AmCharts.ready(function () {
                 // PIE CHART
                 chart = new AmCharts.AmPieChart();
@@ -39,18 +111,51 @@
                 chart.outlineColor = "#FFFFFF";
                 chart.outlineAlpha = 0.8;
                 chart.outlineThickness = 2;
+                chart.urlField="www.baidu.com";
                 // this makes the chart 3D
                 chart.depth3D = 15;
                 chart.angle = 30;
+                chart.labelText="[[title]]: [[value]]";
+                chart.addListener("clickSlice",function(e){pieClickHandle(e)});
 
                 // WRITE
                 chart.write("chartdiv");
+
+                function pieClickHandle(e){
+                
+                	// PIE CHART
+                    chart = new AmCharts.AmPieChart();
+
+                    // title of the chart
+                    chart.addTitle("Visitors countries", 16);
+
+                    chart.dataProvider = columnData;
+                    chart.titleField = "country";
+                    chart.valueField = "visits";
+                    chart.sequencedAnimation = true;
+                    chart.startEffect = "bounce";
+                    chart.innerRadius = "30%";
+                    chart.startDuration = 2;
+                    chart.labelRadius = 15;
+
+                    // the following two lines makes the chart 3D
+                    chart.depth3D = 10;
+                    chart.angle = 15;
+
+                    chart.addListener("clickSlice",function(e){alert("sss");});
+
+                    // WRITE                                 
+                    chart.write("columndiv");
+                }
             });
+
+          
         </script>
     </head>
     
     <body>
-        <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+        <div id="chartdiv" style="width: 100%; height: 300px;"></div>
+        <div id="columndiv" style="width: 100%; height: 300px;"></div>
     </body>
 
 </html>

@@ -2,18 +2,7 @@
 <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN"  
 "http://jetty.mortbay.org/configure.dtd">
 <Configure class="org.mortbay.jetty.webapp.WebAppContext">
-  <!--  
-	<New id="dataSource" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>java:jdbc/appmgt</Arg>
-		<Arg>
-			<New class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource">
-				<Set name="url">jdbc:mysql://localhost:3306/test</Set>
-				<Set name="user">root</Set>
-				<Set name="password">asdf1234</Set>
-			</New>
-		</Arg>
-	</New>
--->
+
 	<New id="dataSource" class="org.mortbay.jetty.plus.naming.Resource">
 		<Arg>jdbc/report</Arg>
 		<Arg>

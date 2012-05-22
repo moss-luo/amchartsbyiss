@@ -22,17 +22,17 @@
 		<jdbc:script location="classpath:database/appmgt.sql"/> <jdbc:script location="classpath:database/jpetstore-hsqldb-dataload.sql"/> 
 		</jdbc:embedded-database> -->
 		
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName">
-			<value>java:comp/env/jdbc/report</value>
-		</property>
- 	</bean> 
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<!-- 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+<!-- 		<property name="jndiName"> -->
+<!-- 			<value>java:comp/env/jdbc/report</value> -->
+<!-- 		</property> -->
+<!--  	</bean>  -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 	    <property name="url" value="jdbc:oracle:thin:@10.36.64.250:1521:ORCL" />
 	    <property name="username" value="reporter" />
 	    <property name="password" value="reporter" />
-	</bean> -->
+	</bean>
 	
 	<!-- transaction manager, use JtaTransactionManager for global tx -->
 	<bean id="transactionManager"

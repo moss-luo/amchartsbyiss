@@ -8,10 +8,10 @@
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.objectFactory.spring.autoWire" value="type" />
 	<constant name="struts.convention.action.mapAllMatches" value="true" />
-	<constant name="struts.convention.default.parent.package" value="report" />
+	<constant name="struts.convention.default.parent.package" value="amchartsbyiss" />
 	<constant name="struts.convention.result.path" value="" />
 	
-	<package name="report" extends="json-default" abstract="true">
+	<package name="amchartsbyiss" extends="json-default" abstract="true">
 		<global-results>
 			<result name="error">/WEB-INF/error.html</result>
 		</global-results>

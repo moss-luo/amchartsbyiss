@@ -1,12 +1,11 @@
 ﻿var indexdata = 
 [
-    { text: '基础',isexpand:false, children: [ 
+    { text: '3D部分',isexpand:false, children: [ 
 		{url:"example/pie3D.html",text:"pie3D展示"},
-		{url:"demos/base/drag.htm",text:"拖动"},
-		{url:"demos/base/drag2.htm",text:"拖动2"},
-		{url:"demos/base/dragresizable.htm",text:"拖动并改变大小"},
-		{url:"demos/base/tip.htm",text:"气泡"},
-		{url:"demos/base/tip2.htm",text:"气泡2"}
+		{url:"example/column3D.html",text:"column3D展示"},
+		{url:"example/bar3D.html",text:"bar3D展示"},
+		{url:"example/pieDonut3D.html",text:"pieDonut3D展示"},
+		{url:"example/column3DStacked.html",text:"column3DStacked展示"}
 	]
     },
     { text: '过滤器', isexpand: false, children: [
@@ -178,8 +177,8 @@
     {isexpand:"false",text:"面板",children:[ 
 	    {url:"demos/accordion/accordion.htm",text:"面板"}
     ]},
-    {isexpand:"false",text:"布局",children:[ 
-	    {url:"demos/layout/layoutMinWidth.htm",text:"最小宽度"},
+    {isexpand:"false",text:"表格图形报表样例展示",children:[ 
+	    {url:"gridchart/search.html",text:"表+饼图"},
 	    {url:"demos/layout/layoutAutoHeight.htm",text:"自动高度"},
 	    {url:"demos/layout/layoutAutoHeightAndDiff.htm",text:"高度补差"},
 	    {url:"demos/layout/layoutCenterOnly.htm",text:"只显示中间部分"},

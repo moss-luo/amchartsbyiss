@@ -226,6 +226,18 @@
 			<version>${struts2Version}</version>
 		</dependency>
 		<!-- struts2 end -->
+		<!-- hibernate begin -->
+		<dependency>  
+		    <groupId>org.hibernate</groupId>  
+		    <artifactId>hibernate-core</artifactId>  
+		    <version>${hibernateCoreVersion}</version>  
+		    <scope>compile</scope>
+		</dependency> 
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-annotations</artifactId>
+		    <version>${hibernateAnnotationsVersion}</version>
+		</dependency>
 		<!-- database connector begin -->
 		<dependency>
 			<groupId>mysql</groupId>

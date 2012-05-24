@@ -13,6 +13,7 @@ public class SearchAction implements SummaryProvider{
 	private List<User> userList;
 	public String execute(){
 		userList = new ArrayList<User>();
+		
 		userList.add(new User(1,"king","shenzhen","gbicc",88,120));
 		userList.add(new User(2,"lbj","shenzhen","iss",125,139));
 		userList.add(new User(3,"kobe","shenzhen","gbicc",60,77));

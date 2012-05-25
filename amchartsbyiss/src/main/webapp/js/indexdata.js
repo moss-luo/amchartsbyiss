@@ -10,7 +10,7 @@
     },
     {isexpand:"false",text:"表格图形报表样例展示",children:[ 
 	    {url:"gridchart/search.html",text:"表+饼图"},
-	    {url:"demos/layout/layoutAutoHeight.htm",text:"自动高度"},
+	    {url:"gridchart/toolbar.html",text:"工具条弹出框"},
 	    {url:"demos/layout/layoutAutoHeightAndDiff.htm",text:"高度补差"},
 	    {url:"demos/layout/layoutCenterOnly.htm",text:"只显示中间部分"},
 	    {url:"demos/layout/layoutFixedHeight.htm",text:"固定高度"},

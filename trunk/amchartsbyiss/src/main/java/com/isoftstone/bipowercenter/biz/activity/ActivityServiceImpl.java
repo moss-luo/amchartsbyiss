@@ -25,6 +25,11 @@ public class ActivityServiceImpl  implements ActivityService {
 	}
 
 	@Override
+	public void addActivity(MarketTask task) throws Exception {
+		activityDao.addActivity(task);
+	}
+
+	@Override
 	public int getTotal() {
 		log.debug("ActivityServiceImpl:getTotal begin!");
 		try {

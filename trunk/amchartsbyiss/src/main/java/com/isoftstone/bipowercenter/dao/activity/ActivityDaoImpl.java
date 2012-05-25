@@ -29,4 +29,10 @@ public class ActivityDaoImpl extends SqlSessionDaoSupport implements ActivityDao
 		return total;
 	}
 
+	@Override
+	public void addActivity(MarketTask task) throws Exception {
+		this.getSqlSession().insert("com.isoftstone.bipowercenter.dao.ActivityMapper.insertActivity", task);
+	}
+
+	
 }

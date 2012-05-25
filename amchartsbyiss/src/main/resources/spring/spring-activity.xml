@@ -29,12 +29,12 @@
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
      
     
-     <!-- 
-	<bean id="activityDao" class="com.lingtu.openlbs.report.dao.activity.ActivityDaoImpl">
+     
+	<bean id="activityDao" class="com.isoftstone.bipowercenter.dao.activity.ActivityDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-    <bean id="activityService" class="com.lingtu.openlbs.report.biz.activity.ActivityServiceImpl" >
+    <bean id="activityService" class="com.isoftstone.bipowercenter.biz.activity.ActivityServiceImpl" >
         <property name="activityDao"><ref bean="activityDao"/></property>
     </bean>
-     -->
+     
 </beans>

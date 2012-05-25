@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Result;
 
-import com.isoftstone.agiledev.query.SummaryProvider;
+import com.isoftstone.bipowercenter.common.SummaryProvider;
 import com.isoftstone.bipowercenter.vo.User;
 @Result(name = "query", type = "ligerui-datagrid-json", params = { "root", "userList" })
 public class SearchAction implements SummaryProvider{
@@ -26,8 +26,9 @@ public class SearchAction implements SummaryProvider{
 		userList.add(new User(10,"lakers","shenzhen","iss",81,95));
 		return "query";
 	}
+	@Override
 	public int getTotal() {
-		return 10;
+		return 0;
 	}
 	public List<User> getUserList() {
 		return userList;

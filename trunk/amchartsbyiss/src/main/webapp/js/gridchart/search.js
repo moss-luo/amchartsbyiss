@@ -31,9 +31,9 @@ function makeAmcharts(){
     chart.categoryField = "name";		//类别名称（此处以名称分类）
     chart.startDuration = 1;
     chart.plotAreaFillAlphas = 0.2;
-    // the following two lines makes chart 3D
-    chart.angle = 30;
-    chart.depth3D = 60;
+    // 以下两行代码是将柱形图设置成3D
+    //chart.angle = 30;
+    // chart.depth3D = 60;
 
     // AXES
     // category

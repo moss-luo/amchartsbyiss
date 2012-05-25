@@ -13,9 +13,10 @@ import org.slf4j.LoggerFactory;
 import com.isoftstone.bipowercenter.biz.activity.ActivityService;
 import com.isoftstone.bipowercenter.common.SummaryProvider;
 import com.isoftstone.bipowercenter.vo.MarketTask;
+import com.opensymphony.xwork2.ModelDriven;
 
 @Result(name = "activityResult", type = "ligerui-datagrid-json", params = { "root", "result" })
-public class ActivityAction implements SummaryProvider{
+public class ActivityAction implements SummaryProvider,ModelDriven<MarketTask>{
 	
 	private static Logger log = LoggerFactory.getLogger(ActivityAction.class);
 	private List<MarketTask> result = null;
@@ -78,6 +79,10 @@ public class ActivityAction implements SummaryProvider{
 	}
 	public void setResult(List<MarketTask> result) {
 		this.result = result;
+	}
+	@Override
+	public MarketTask getModel() {
+		return task;
 	}
 	
 	

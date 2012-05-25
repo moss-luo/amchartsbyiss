@@ -10,4 +10,5 @@ public interface ActivityService extends SummaryProvider{
 	
 	List<MarketTask> queryActivity(Map<String, Object> mt) throws Exception;
 	
+	void addActivity(MarketTask task)throws Exception;
 }

@@ -9,4 +9,5 @@ public interface ActivityDao {
 
 	List<MarketTask> queryActivity(Map<String, Object> mt) throws Exception;
 	int selectTotalTask(Map<String, Object> mt) throws Exception;
+	void addActivity(MarketTask task) throws Exception;
 }

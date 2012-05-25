@@ -7,67 +7,29 @@
 		<id property="id" column="ID" jdbcType="VARCHAR"/>
 		<result property="name" column="NAME" jdbcType="VARCHAR"/>
 		<result property="note" column="NOTE"  jdbcType="VARCHAR"/>
-		<result property="objectType" column="OBJECT_TYPE" jdbcType="INTEGER"/>
-		<result property="objectId" column="OBJECT_ID" jdbcType="VARCHAR"/>
-		<result property="taskType" column="TYPE" jdbcType="INTEGER"/>
 		<result property="mktContent" column="MKT_CONTENT" jdbcType="VARCHAR"/>
 		<result property="startTime" column="START_TIME" jdbcType="DATE"/>
 		<result property="endTime" column="END_TIME" jdbcType="DATE"/>
 		<result property="execTime" column="EXEC_TIME" jdbcType="DATE"/>
-		<result property="status" column="STATUS" jdbcType="INTEGER"/>
-		<result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
-		<result property="awardType" column="award_type" jdbcType="VARCHAR"/>
-		<result property="processId" column="processId" jdbcType="VARCHAR"/>
 		<result property="totalCount" column="TOTAL_COUNT" jdbcType="INTEGER"/>
     </resultMap>
 
 	<select id="queryActivity" parameterType="map" resultMap="ActivityResultMap">
-		select * from(
-       		select tab.*,rownum rn from(	
-				select * from t_market_task
-					<where>
-						status in (3,4)
-						<if test="name!=null and name[0]!=''">
-							and name like '%'||#{name[0]}||'%'
-						</if>
-						<if test="userName!=null">
-							and user_id = #{userName}
-						</if>
-						<if test="objectType!=null and objectType[0]!='-1'">
-							and object_type=#{objectType[0]}
-						</if>
-						<if test="taskType!=null">
-							and type=#{taskType[0]}
-						</if>
-						<if test="status!=null and status[0]!='-1'">
-							and status=#{status[0]}
-						</if>
-					</where>
-					order by id desc)tab
-        	WHERE ROWNUM &lt;=#{endNum}
-      		)
-     WHERE RN &gt;=#{startNum}
+		select * from t_market_task
+			<where>
+				<if test="name!=null and name[0]!=''">
+					and name like '%'||#{name[0]}||'%'
+				</if>
+			</where>
+			order by id desc limit #{startNum},#{endNum}
 	</select>
 	
 	<select id="selectTotalActivity" parameterType="map" resultType="int">
 		select count(*) from(
 				select * from t_market_task 
 					<where>
-						status in (3,4)
 						<if test="name!=null and name[0]!=''">
 							and name like '%'||#{name[0]}||'%'
-						</if>
-						<if test="userName!=null">
-							and user_id = #{userName}
-						</if>
-						<if test="objectType!=null and objectType[0]!='-1'">
-							and object_type=#{objectType[0]}
-						</if>
-						<if test="taskType!=null">
-							and type=#{taskType[0]}
-						</if>
-						<if test="status!=null and status[0]!='-1'">
-							and status=#{status[0]}
 						</if>
 					</where>
 		)

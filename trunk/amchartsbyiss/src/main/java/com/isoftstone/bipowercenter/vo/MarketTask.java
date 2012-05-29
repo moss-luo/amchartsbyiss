@@ -25,6 +25,7 @@ public class MarketTask {
 	private String endTime;					//营销活动结束时间
 	private String execTime;				//营销活动执行时间
 	private int totalCount;					//营销活动用户限量
+	private int successCount;				//营销活动成功数量
 	
 	public int getId() {
 		return id;
@@ -74,6 +75,12 @@ public class MarketTask {
 	}
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+	}
+	public int getSuccessCount() {
+		return successCount;
+	}
+	public void setSuccessCount(int successCount) {
+		this.successCount = successCount;
 	}
 	
 	

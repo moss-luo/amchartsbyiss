@@ -41,6 +41,11 @@ public class ActivityServiceImpl  implements ActivityService {
 		return 0;
 	}
 
+	@Override
+	public void deleteActivity(int taskId) throws Exception {
+		activityDao.deleteActivity(taskId);
+	}
+
 	public ActivityDao getActivityDao() {
 		return activityDao;
 	}

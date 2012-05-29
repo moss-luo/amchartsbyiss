@@ -34,5 +34,10 @@ public class ActivityDaoImpl extends SqlSessionDaoSupport implements ActivityDao
 		this.getSqlSession().insert("com.isoftstone.bipowercenter.dao.ActivityMapper.insertActivity", task);
 	}
 
+	@Override
+	public void deleteActivity(int taskId) throws Exception {
+		this.getSqlSession().delete("com.isoftstone.bipowercenter.dao.ActivityMapper.deleteActivity", taskId);
+	}
+
 	
 }

@@ -12,25 +12,35 @@
 		<result property="endTime" column="END_TIME" jdbcType="DATE"/>
 		<result property="execTime" column="EXEC_TIME" jdbcType="DATE"/>
 		<result property="totalCount" column="TOTAL_COUNT" jdbcType="INTEGER"/>
+		<result property="successCount" column="SUCCESS_COUNT" jdbcType="INTEGER"/>
     </resultMap>
 
-	<select id="queryActivity" parameterType="map" resultMap="ActivityResultMap">
-		select * from t_market_task
-			<where>
-				<if test="name!=null and name!=''">
-					and name like '%'||#{name}||'%'
-				</if>
-			</where>
-			order by id desc limit #{startNum},#{endNum}
+<select id="queryActivity" parameterType="map" resultMap="ActivityResultMap">
+		select * from(
+       		select tab.*,rownum rn from(	
+				select * from t_market_task
+					<where>
+						1=1
+						<if test="name!=null and name!=''">
+							and name like '%'||#{name}||'%'
+						</if>
+					
+					</where>
+					order by id desc)tab
+        	WHERE ROWNUM &lt;=#{endNum}
+      		)
+     WHERE RN &gt;=#{startNum}
 	</select>
 	
 	<select id="selectTotalActivity" parameterType="map" resultType="int">
 		select count(*) from(
 				select * from t_market_task 
 					<where>
+						1=1
 						<if test="name!=null and name!=''">
 							and name like '%'||#{name}||'%'
 						</if>
+						
 					</where>
 		)
 	</select>
@@ -38,7 +48,7 @@
 	<insert id="insertActivity" parameterType="com.isoftstone.bipowercenter.vo.MarketTask">
 		insert into 
 			t_market_task(id,name,note,mkt_content,start_time,end_time,exec_time,total_count)
-			      values(#{id},#{name},#{note},#{mktContent},#{startTime},#{endTime},#{execTime},#{totalCount})
+			      values(SEQ_MARKET_TASK_ID.nextval,#{name},#{note},#{mktContent},#{startTime},#{endTime},#{execTime},#{totalCount})
 	</insert>
 	
 	<update id="modifyActivity" parameterType="com.isoftstone.bipowercenter.vo.MarketTask">
@@ -53,4 +63,8 @@
 		where
 			id=#{id}
 	</update>
+	
+	<delete id="deleteActivity" parameterType="int">
+		delete from t_market_task where id=#{taskId}
+	</delete>
 </mapper>

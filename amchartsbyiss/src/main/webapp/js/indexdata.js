@@ -1,10 +1,11 @@
 ﻿var indexdata = 
 [
-    { text: '3D部分',isexpand:false, children: [ 
+    { text: 'amcharts example',isexpand:false, children: [ 
 		{url:"example/pie3D.html",text:"pie3D展示"},
 		{url:"example/column3D.html",text:"column3D展示"},
 		{url:"example/bar3D.html",text:"bar3D展示"},
 		{url:"example/pieDonut3D.html",text:"pieDonut3D展示"},
+		{url:"example/barClick.html",text:"多图展示"},
 		{url:"example/column3DStacked.html",text:"column3DStacked展示"}
 	]
     },

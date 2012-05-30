@@ -9,7 +9,7 @@ function makeChart() {
     chart = new AmCharts.AmPieChart();
     chart.dataProvider = chartData;
     chart.addTitle("应用下载安装统计", 16);
-    chart.titleField = "country";
+    chart.titleField = "appName";
     chart.valueField = "value";
     chart.outlineColor = "#FFFFFF";
     chart.outlineAlpha = 0.8;
@@ -20,7 +20,7 @@ function makeChart() {
     chart.angle = 30;
     chart.labelText="[[title]]: [[value]]";
     chart.addListener("clickSlice",function(e){
-    									pieClickHandle(e.dataItem.dataContext.country)
+    									pieClickHandle(e.dataItem.dataContext.appName)
     							}
     				);
 
@@ -41,7 +41,7 @@ function pieClickHandle(appName){
 
     chart.dataProvider = columnData;
     chart.titleField = "country";
-    chart.valueField = "visits";
+    chart.valueField = "value";
     chart.sequencedAnimation = true;
     chart.startEffect = "bounce";
     chart.innerRadius = "30%";
@@ -64,7 +64,7 @@ function makeBarChart(city,appName){
     chart = new AmCharts.AmSerialChart();
     chart.dataProvider = barData;
     chart.addTitle(city+"("+appName+")"+"2011年下载统计明细", 16);
-    chart.categoryField = "year";
+    chart.categoryField = "time";
     chart.startDuration = 1;
     chart.addListener("clickGraphItem", function (event) {
 								     	  alert("you click category is "+event.item.category+",value:"+event.item.values.value);
@@ -87,7 +87,7 @@ function makeBarChart(city,appName){
 
     // GRAPH
     var graph = new AmCharts.AmGraph();
-    graph.valueField = "visits";
+    graph.valueField = "value";
     graph.colorField = "color";
     graph.balloonText = "[[category]]: [[value]]";
     graph.type = "column";

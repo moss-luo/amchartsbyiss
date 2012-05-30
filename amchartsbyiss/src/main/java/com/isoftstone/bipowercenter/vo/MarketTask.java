@@ -27,6 +27,28 @@ public class MarketTask {
 	private int totalCount;					//营销活动用户限量
 	private int successCount;				//营销活动成功数量
 	
+	public MarketTask(int id, String name, int totalCount,
+			int successCount,String execTime) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.totalCount = totalCount;
+		this.successCount = successCount;
+		this.execTime = execTime;
+	}
+	
+	public MarketTask(int id, String name, String note, String mktContent,
+			int totalCount, int successCount) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.note = note;
+		this.mktContent = mktContent;
+		this.totalCount = totalCount;
+		this.successCount = successCount;
+	}
+
+
 	public int getId() {
 		return id;
 	}

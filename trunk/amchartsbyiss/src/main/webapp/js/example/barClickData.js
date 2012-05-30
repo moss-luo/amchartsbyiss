@@ -14,9 +14,6 @@ var chartData = [
 	}, {
 	    country: "Swampy",
 	    value: 1900
-	}, {
-	    country: "Latvia",
-	    value: 1000
 	}];
 
  var columnData = [
@@ -41,9 +38,6 @@ var chartData = [
 	 }, {
 	     country: "东北区",
 	     visits: 665,
-	 }, {
-	     country: "Russia",
-	     visits: 580,
 	 }];
 
  var barData  = [

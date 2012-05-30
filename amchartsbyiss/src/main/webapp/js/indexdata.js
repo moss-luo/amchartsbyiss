@@ -5,8 +5,9 @@
 		{url:"example/column3D.html",text:"column3D展示"},
 		{url:"example/bar3D.html",text:"bar3D展示"},
 		{url:"example/pieDonut3D.html",text:"pieDonut3D展示"},
+		{url:"example/column3DStacked.html",text:"column3DStacked展示"},
 		{url:"example/barClick.html",text:"多图展示"},
-		{url:"example/column3DStacked.html",text:"column3DStacked展示"}
+		{url:"example/columnGrid.html",text:"图表结合"}
 	]
     },
     {isexpand:"false",text:"表格图形报表样例展示",children:[ 

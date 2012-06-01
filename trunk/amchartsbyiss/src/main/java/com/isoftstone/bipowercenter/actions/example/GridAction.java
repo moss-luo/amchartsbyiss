@@ -13,7 +13,7 @@ private List<MarketTask> result ;
 	
 	public String execute(){
 		result = new ArrayList<MarketTask>();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 10; i++) {
 			int data = (int) (Math.random()*100+30);
 			MarketTask temp = new MarketTask(i+1, "活动"+(i+1), "活动的介绍", "短信内容",  data+100, data-30+i*10);
 			result.add(temp);
@@ -31,6 +31,6 @@ private List<MarketTask> result ;
 
 	@Override
 	public int getTotal() {
-		return 8;
+		return 10;
 	}
 }

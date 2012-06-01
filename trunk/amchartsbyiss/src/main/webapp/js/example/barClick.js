@@ -69,6 +69,7 @@ function makeBarChart(city,appName){
     chart.addListener("clickGraphItem", function (event) {
 								     	  alert("you click category is "+event.item.category+",value:"+event.item.values.value);
 								     	});
+    /**
     // AXES
     // category
     var categoryAxis = chart.categoryAxis;
@@ -84,7 +85,7 @@ function makeBarChart(city,appName){
     valueAxis.title = "下载次数"
     valueAxis.axisAlpha = 0;
     chart.addValueAxis(valueAxis);
-
+*/
     // GRAPH
     var graph = new AmCharts.AmGraph();
     graph.valueField = "value";

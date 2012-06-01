@@ -27,6 +27,8 @@ public class MarketTask {
 	private int totalCount;					//营销活动用户限量
 	private int successCount;				//营销活动成功数量
 	
+	public MarketTask(){}
+	
 	public MarketTask(int id, String name, int totalCount,
 			int successCount,String execTime) {
 		super();

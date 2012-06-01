@@ -5,24 +5,15 @@
 		{url:"example/column3D.html",text:"column3D展示"},
 		{url:"example/bar3D.html",text:"bar3D展示"},
 		{url:"example/pieDonut3D.html",text:"pieDonut3D展示"},
-		{url:"example/column3DStacked.html",text:"column3DStacked展示"},
-		{url:"example/barClick.html",text:"多图展示"},
-		{url:"example/columnGrid.html",text:"图表结合"}
+		{url:"example/column3DStacked.html",text:"column3DStacked展示"}
 	]
     },
     {isexpand:"false",text:"表格图形报表样例展示",children:[ 
 	    {url:"gridchart/search.html",text:"表+饼图"},
 	    {url:"gridchart/toolbar.html",text:"工具条弹出框"},
-	    {url:"demos/layout/layoutAutoHeightAndDiff.htm",text:"高度补差"},
-	    {url:"demos/layout/layoutCenterOnly.htm",text:"只显示中间部分"},
-	    {url:"demos/layout/layoutFixedHeight.htm",text:"固定高度"},
-	    {url:"demos/layout/layoutFullHeight.htm",text:"全屏高度"},
-	    {url:"demos/layout/layoutHalfHeight.htm",text:"百分比高度"},
-	    {url:"demos/layout/layoutLeftMiddleOnly.htm",text:"只显示左侧和中间"},
-	    {url:"demos/layout/layoutLeftWidth.htm",text:"限制左边宽度"},
-	    {url:"demos/layout/layoutLeftHide.htm",text:"左边刚开始隐藏"}, 
-	    {url:"demos/layout/layoutHideToggle.htm",text:"左边右边不允许隐藏"},  
-	    {url:"demos/layout/layoutResizeDisable.htm",text:"左边底部不允许调整大小"}  
+		{url:"example/barClick.html",text:"多图展示"},
+		{url:"example/columnGrid.html",text:"图表结合"},
+		{url:"example/drill_down.html",text:"模拟钻取"} 
     ]}
 ];
 

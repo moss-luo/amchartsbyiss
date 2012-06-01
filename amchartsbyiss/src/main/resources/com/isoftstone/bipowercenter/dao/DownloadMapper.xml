@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.isoftstone.bipowercenter.dao.DownloadMapper">
+	
+	<select id="queryByTime" parameterType="map" resultType="com.isoftstone.bipowercenter.vo.AppDownload">
+		select * from(
+       		select tab.*,rownum rn from(
+				select t.app_id as id, t.app_name as name, t.app_version as appVersion, sum(t.down_count) as downCount
+					from t_app_download_monthly t
+						group by t.app_id, t.app_name, t.app_version
+						order by downCount desc)tab
+        		WHERE ROWNUM &lt;=#{endNum}
+      		)
+     WHERE RN &gt;=#{startNum}
+	</select>
+
+	<select id="queryByTimeTotal"  parameterType="map" resultType="int">
+		select count(1) from (
+			select t.app_id as id, t.app_name as name, t.app_version as appVersion, sum(t.down_count) as downCount
+					from t_app_download_monthly t
+						group by t.app_id, t.app_name, t.app_version
+						order by t.app_id
+		)
+	</select>
+</mapper>

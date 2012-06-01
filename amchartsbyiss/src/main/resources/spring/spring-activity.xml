@@ -37,4 +37,10 @@
         <property name="activityDao"><ref bean="activityDao"/></property>
     </bean>
      
+     <bean id="downloadDao" class="com.isoftstone.bipowercenter.dao.example.DownloadDaoImpl">
+     	<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+     </bean>
+     <bean id="downloadService" class="com.isoftstone.bipowercenter.biz.example.DownloadServiceImpl">
+     	<property name="downloadDao"><ref bean="downloadDao"/></property>
+     </bean>
 </beans>

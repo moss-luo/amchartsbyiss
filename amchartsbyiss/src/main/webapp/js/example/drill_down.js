@@ -2,48 +2,64 @@ var chart;
 var chartData;
 var grid;
 var menu;
-var actionCustomerID;
+var appId;
 
 function itemclick(item, i)
 {
-    alert(actionCustomerID + " | " + item.text);
+//    alert(appId + " | " + item.text);
+	if(item.type=='time'){
+		 grid = $("#top").ligerGrid({
+			    columns: [
+			            { display: '主键', name: 'id'},
+			            { display: '应用名称',name: 'name'},
+			            { display: '应用版本号', name: 'appVersion'}, 
+			            { display: '总下载次数', name: 'downCount'} 
+			    	],  
+				    pageSize:10,
+				    usePaper:true,
+				    url:'drill',
+				    width: '99%',
+				    onSuccess:function(data){
+				    	chartData=data.Rows;
+				    	makeLineChart();
+				    },
+				    onContextmenu : function (parm,e)
+	                {
+	                    appId = parm.data.id;
+	                    menu.show({ top: e.pageY, left: e.pageX });
+	                    return false;
+	                } 
+				});
+	}
 }
 
 $(function(){
 	menu = $.ligerMenu({ width: 120, items:
         [
-        { text: '返回', click: itemclick},
+        { text: '返回', click: itemclick,type:'back'},
         { line: true },
-        { text: '按时间钻取', click: itemclick },
-        { text: '按地区钻取', click: itemclick }
+        { text: '按时间钻取', click: itemclick, type:'time',level:0},
+        { text: '按地区钻取', click: itemclick, type:'area',level:0}
         ]
         });
-	 grid = $("#buttom").ligerGrid({
+	 grid = $("#top").ligerGrid({
 		    columns: [
+		             { display: '应用名称',name: 'name'},
 		            { display: '主键', name: 'id'},
-		            { display: '活动名词',name: 'name'},
-		            { display: '活动介绍', name: 'note'}, 
-		            { display: '短信内容', name: 'mktContent'},
-		            { display: '用户总数', name: 'totalCount'},
-		            { display: '营销成功数', name: 'successCount'} 
+		            { display: '应用版本号', name: 'appVersion'}, 
+		            { display: '总下载次数', name: 'downCount'} 
 		    	],  
 			    pageSize:10,
 			    usePaper:true,
-			    url:'grid',
+			    url:'drill',
 			    width: '99%',
-			    onSuccess:function(){
-			    	  $.ajax({
-	                    	url:'column',
-	                    	data:{taskName:"所有活动"},
-	                    	success:function(result){
-	                    		chartData=result;
-	                    		makeChart("所有活动");
-	                    	}
-	                    });
+			    onSuccess:function(data){
+			    	chartData=data.Rows;
+			    	makePieAndColumn();
 			    },
 			    onContextmenu : function (parm,e)
                 {
-                    actionCustomerID = parm.data.id;
+                    appId = parm.data.id;
                     menu.show({ top: e.pageY, left: e.pageX });
                     return false;
                 } 
@@ -53,15 +69,18 @@ $(function(){
 	
 });
 
-function makeChart(taskName){
-	$("#top").html("");
+/**
+ * 绘制折线图，主要用于查看趋势(本例绘制在展示页面底部)
+ */
+function makeLineChart(){
+	$("#buttom").html("");
 	 // SERIAL CHART  
     chart = new AmCharts.AmSerialChart();
     chart.pathToImages = "../images/";
     chart.dataProvider = chartData;
     chart.categoryField = "execTime";
     chart.startDuration = 1;
-    chart.addTitle(taskName+":2011年度分月营销效果分析", 16);
+    chart.addTitle("XX应用下载趋势图", 16);
     // AXES
     // category
     var categoryAxis = chart.categoryAxis;
@@ -75,22 +94,13 @@ function makeChart(taskName){
     
     // GRAPHS
     // line1 graph
-    var graph1 = new AmCharts.AmGraph();
-    graph1.type = "line";
-    graph1.title = "活动用户总数";
-    graph1.valueField = "totalCount";
-    graph1.lineThickness = 2;
-    graph1.bullet = "round";
-    chart.addGraph(graph1);
-
-    // line2 graph
-    var graph2 = new AmCharts.AmGraph();
-    graph2.type = "line";
-    graph2.title = "营销成功总数";
-    graph2.valueField = "successCount";
-    graph2.lineThickness = 2;
-    graph2.bullet = "round";
-    chart.addGraph(graph2);
+    var graph = new AmCharts.AmGraph();
+    graph.type = "line";
+    graph.title = "下载次数";
+    graph.valueField = "downCount";
+    graph.lineThickness = 2;
+    graph.bullet = "round";
+    chart.addGraph(graph);
 
     // LEGEND                
     var legend = new AmCharts.AmLegend();
@@ -98,5 +108,58 @@ function makeChart(taskName){
     chart.addLegend(legend);
 
     // WRITE
-    chart.write("top");
+    chart.write("buttom");
+}
+/**
+ * 绘制饼状图和柱形图，主要用于对比份额，本例绘制在底部左右两侧，初始化加载
+ */
+function makePieAndColumn(){
+	$("#buttom").html("");
+	
+	$("#buttom").html("<div id='buttomLeft' style='float:left;height: 375px;width:50%'></div>" +
+					  "<div id='buttomRight' style='float:left;height: 375px;width:50%'></div>");
+	
+	/**
+	 * 绘制饼形图
+	 */
+    chart = new AmCharts.AmPieChart();
+    chart.dataProvider = chartData;
+    chart.titleField = "name";
+    chart.valueField = "downCount";
+    chart.sequencedAnimation = true;
+    chart.startEffect = "elastic";
+    chart.innerRadius = "30%";
+    chart.startDuration = 2;
+    chart.labelRadius = 15;
+
+    // the following two lines makes the chart 3D
+    chart.depth3D = 10;
+    chart.angle = 15;
+    
+    chart.labelText="[[title]]: [[value]]";
+
+    // WRITE
+    chart.write("buttomLeft");
+    /**
+     * 绘制柱形图
+     */
+    chart = new AmCharts.AmSerialChart();
+    chart.dataProvider = chartData;
+    chart.categoryField = "name";
+    chart.startDuration = 1;
+    
+    var categoryAxis = chart.categoryAxis;
+    categoryAxis.labelRotation = 45;
+    categoryAxis.gridPosition = "start";
+    // GRAPH
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "downCount";
+    graph.balloonText = "[[category]]: [[value]]";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 1;
+    chart.addGraph(graph);
+
+    // WRITE
+    chart.write("buttomRight");
 }

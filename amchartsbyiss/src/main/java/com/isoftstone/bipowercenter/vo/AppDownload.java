@@ -1,6 +1,12 @@
 package com.isoftstone.bipowercenter.vo;
 
-public class AppDownload {
+import java.io.Serializable;
+
+public class AppDownload implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4450742989582921435L;
 	private int id;
 	private String name;
 	private String time;

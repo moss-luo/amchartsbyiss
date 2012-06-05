@@ -8,9 +8,11 @@ import org.apache.struts2.convention.annotation.Result;
 import com.isoftstone.bipowercenter.biz.example.DownloadService;
 import com.isoftstone.bipowercenter.common.SummaryProvider;
 import com.isoftstone.bipowercenter.vo.AppDownload;
+import com.opensymphony.xwork2.ActionSupport;
 
 @Result(name = "query", type = "ligerui-datagrid-json", params = { "root", "result" })
-public class DrillAction implements SummaryProvider{
+public class DrillAction extends ActionSupport implements SummaryProvider{
+	private static final long serialVersionUID = 1L;
 	@Resource
 	private DownloadService downloadService;
 	private List<AppDownload> result;
@@ -18,7 +20,8 @@ public class DrillAction implements SummaryProvider{
 	//分页信息
 	private int page;
 	private int pagesize;
-	
+
+	@Override
 	public String execute(){
 		try {
 			para.put("startNum", pagesize*(page-1)+1);

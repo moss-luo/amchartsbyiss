@@ -7,9 +7,36 @@
 		select * from(
        		select tab.*,rownum rn from(
 				select t.app_id as id, t.app_name as name, t.app_version as appVersion, sum(t.down_count) as downCount
-					from t_app_download_monthly t
+					<choose>
+						<when test="timeLevel!=null and timeLevel[0]==2">
+							,t.year_week as time from t_app_download_weekly t
+						</when>
+						<when test="timeLevel!=null and timeLevel[0]==3">
+							,t.year_day as time from t_app_download_daily t
+						</when>
+						<otherwise>
+							,t.year_month as time from t_app_download_monthly t
+						</otherwise>
+					</choose>
+					<where>
+						1=1
+						<if test="appId!=null and appId[0]!=''">
+							and t.app_id=#{appId[0]}
+						</if>
+					</where>
 						group by t.app_id, t.app_name, t.app_version
-						order by downCount desc)tab
+					<choose>
+						<when test="timeLevel!=null and timeLevel[0]==2">
+							,t.year_week order by t.year_week
+						</when>
+						<when test="timeLevel!=null and timeLevel[0]==3">
+							,t.year_day  order by t.year_day
+						</when>
+						<otherwise>
+							,t.year_month order by t.year_month
+						</otherwise>
+					</choose>
+					)tab
         		WHERE ROWNUM &lt;=#{endNum}
       		)
      WHERE RN &gt;=#{startNum}
@@ -18,9 +45,35 @@
 	<select id="queryByTimeTotal"  parameterType="map" resultType="int">
 		select count(1) from (
 			select t.app_id as id, t.app_name as name, t.app_version as appVersion, sum(t.down_count) as downCount
-					from t_app_download_monthly t
-						group by t.app_id, t.app_name, t.app_version
-						order by t.app_id
+					<choose>
+						<when test="timeLevel!=null and timeLevel[0]==2">
+							,t.year_week as time from t_app_download_weekly t
+						</when>
+						<when test="timeLevel!=null and timeLevel[0]==3">
+							,t.year_day as time from t_app_download_daily t
+						</when>
+						<otherwise>
+							,t.year_month as time from t_app_download_monthly t
+						</otherwise>
+					</choose>
+					<where>
+						1=1
+						<if test="appId!=null and appId[0]!=''">
+							and t.app_id=#{appId[0]}
+						</if>
+					</where>
+					group by t.app_id, t.app_name, t.app_version
+				<choose>
+						<when test="timeLevel!=null and timeLevel[0]==2">
+							,t.year_week order by t.year_week
+						</when>
+						<when test="timeLevel!=null and timeLevel[0]==3">
+							,t.year_day  order by t.year_day
+						</when>
+						<otherwise>
+							,t.year_month order by t.year_month
+						</otherwise>
+					</choose>
 		)
 	</select>
 </mapper>

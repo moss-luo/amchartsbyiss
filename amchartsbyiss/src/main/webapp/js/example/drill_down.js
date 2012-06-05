@@ -1,4 +1,4 @@
-var chart,chartData,initGrid,drillGrid,menu,appId;
+var chart,chartData,initGrid,drillGrid,menu,appId,appName;
 var timeLevel = 0;
 
 function itemclick(item, i)
@@ -92,6 +92,7 @@ function init(){
 			    onContextmenu : function (parm,e)
                 {
                     appId = parm.data.id;
+                    appName = parm.data.name
                     menu.show({ top: e.pageY, left: e.pageX });
                     return false;
                 } 
@@ -111,7 +112,7 @@ function makeLineChart(){
     chart.dataProvider = chartData;
     chart.categoryField = "time";
     chart.startDuration = 1;
-    chart.addTitle("XX应用下载趋势图", 16);
+    chart.addTitle(appName+"下载趋势图", 16);
     // AXES
     // category
     var categoryAxis = chart.categoryAxis;

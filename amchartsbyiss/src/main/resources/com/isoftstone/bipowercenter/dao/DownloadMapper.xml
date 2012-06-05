@@ -9,13 +9,18 @@
 				select t.app_id as id, t.app_name as name, t.app_version as appVersion, sum(t.down_count) as downCount
 					<choose>
 						<when test="timeLevel!=null and timeLevel[0]==2">
-							,t.year_week as time from t_app_download_weekly t
+							, DECODE(t.year_week, null, '',substr(t.year_week, 0, 4) || '年' || substr(t.year_week, 5, 2) || '周') as time
+								from t_app_download_weekly t
 						</when>
 						<when test="timeLevel!=null and timeLevel[0]==3">
-							,t.year_day as time from t_app_download_daily t
+							,DECODE(t.year_day, null, '',
+								substr(t.year_day, 0, 4) || '年' || substr(t.year_day, 5, 2) || '月' || 
+								substr(t.year_day, 7, 2) || '日') as time 
+								from t_app_download_daily t
 						</when>
 						<otherwise>
-							,t.year_month as time from t_app_download_monthly t
+							,DECODE(t.year_month, null, '',substr(t.year_month, 0, 4) || '年' || substr(t.year_month, 5, 2) || '月') as time 
+								from t_app_download_monthly t
 						</otherwise>
 					</choose>
 					<where>
@@ -47,13 +52,18 @@
 			select t.app_id as id, t.app_name as name, t.app_version as appVersion, sum(t.down_count) as downCount
 					<choose>
 						<when test="timeLevel!=null and timeLevel[0]==2">
-							,t.year_week as time from t_app_download_weekly t
+							, DECODE(t.year_week, null, '',substr(t.year_week, 0, 4) || '年' || substr(t.year_week, 5, 2) || '周') as time
+								from t_app_download_weekly t
 						</when>
 						<when test="timeLevel!=null and timeLevel[0]==3">
-							,t.year_day as time from t_app_download_daily t
+							,DECODE(t.year_day, null, '',
+								substr(t.year_day, 0, 4) || '年' || substr(t.year_day, 5, 2) || '月' || 
+								substr(t.year_day, 7, 2) || '日') as time 
+								from t_app_download_daily t
 						</when>
 						<otherwise>
-							,t.year_month as time from t_app_download_monthly t
+							,DECODE(t.year_month, null, '',substr(t.year_month, 0, 4) || '年' || substr(t.year_month, 5, 2) || '月') as time 
+								from t_app_download_monthly t
 						</otherwise>
 					</choose>
 					<where>

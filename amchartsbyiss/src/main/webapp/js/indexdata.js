@@ -13,7 +13,8 @@
 	    {url:"gridchart/toolbar.html",text:"工具条弹出框"},
 		{url:"example/barClick.html",text:"多图展示"},
 		{url:"example/columnGrid.html",text:"图表结合"},
-		{url:"example/drill_down.html",text:"模拟钻取"} 
+		{url:"example/drill_down.html",text:"模拟钻取"} ,
+		{url:"gridchart/group.html",text:"表格分组"}
     ]}
 ];
 

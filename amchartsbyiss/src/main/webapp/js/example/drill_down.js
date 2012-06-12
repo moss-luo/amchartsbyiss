@@ -1,26 +1,51 @@
-var chart,chartData,initGrid,drillGrid,menu,appId,appName;
+var chart,chartData,initGrid,drillGrid,menu,appId,appName,timeText,cateField;
 var timeLevel = 0;
-
-function itemclick(item, i)
+var areaLevel = 0;
+/**
+ * 按时间下钻菜单处理方法
+ */
+function timeclick(item, i)
 {
-	if(item.type=='back'){
-		if(timeLevel>1){
-			timeLevel = timeLevel-1;
-			drillTime();
-		}else if(timeLevel == 1){
-			timeLevel = 0;
-			appId="";
-			init();
-		}else {
-			alert("已经是最顶层了！");
-		}
+	if(timeLevel<3){
+		timeLevel = timeLevel+1;
+		drillTime();
 	}else{
-		if(timeLevel<3){
-			timeLevel = timeLevel+1;
+		alert("已经到最底层了");
+	}
+}
+/**
+ * 按地区下钻菜单处理方法
+ */
+function areaclick(item, i)
+{
+	if(areaLevel<3){
+		areaLevel = areaLevel+1;
+		drillArea();
+	}else{
+		alert("已经到最底层了");
+	}
+}
+/**
+ * 返回上一级菜单处理方法
+ */
+function backclick(item, i)
+{
+	if(timeLevel>0){
+		timeLevel = timeLevel-1;
+		if(timeLevel>0){
 			drillTime();
 		}else{
-			alert("已经到最底层了");
+			init();
 		}
+	}else if(areaLevel>0){
+		areaLevel = areaLevel-1;
+		if(areaLevel>0){
+			drillArea();
+		}else{
+			init();
+		}
+	}else{
+		alert("已经到最顶层了！");
 	}
 	
 }
@@ -34,6 +59,27 @@ $(function(){
  * 按时间下钻
  */
 function drillTime(){
+	cateField="time";
+	if(timeLevel==1){
+		timeText="按周查看";
+	}else if(timeLevel==2){
+		timeText="按天查看";
+	}
+	
+	menu = $.ligerMenu({ width: 120, items:
+        [
+	        { text: '返回上一级', click: backclick,icon: 'back'},
+	        { line: true },
+	        { text: timeText, click: timeclick,icon: 'prev'}
+        ]
+        });
+	
+	if(timeLevel>2){
+		menu = $.ligerMenu({ width: 120, items:
+	        [{ text: '返回上一级', click: backclick,icon: 'back'}]
+	        });
+	}
+	
 	drillGrid = $("#topLeft").ligerGrid({
 	    columns: [			         
 	            { display: '时间', name: 'time'},
@@ -59,6 +105,50 @@ function drillTime(){
 		});
 }
 /**
+ * 按地区钻取
+ */
+function drillArea(){
+	cateField="area";
+	menu = $.ligerMenu({ width: 120, items:
+	        [
+		        { text: '返回上一级', click: backclick,icon: 'back'},
+		        { line: true },
+		        { text: "查看地市数据", click: areaclick,icon: 'prev'}
+	        ]
+        });
+	
+	if(areaLevel==2){
+		menu = $.ligerMenu({ width: 120, items:
+	        [{ text: '返回上一级', click: backclick,icon: 'back'}]
+	        });
+	}
+	
+	drillGrid = $("#topLeft").ligerGrid({
+	    columns: [			         
+	            { display: '地区', name: 'area'},
+	            { display: '应用名称',name: 'name'},
+	            { display: '应用版本号', name: 'appVersion'}, 
+	            { display: '总下载次数', name: 'downCount'} 
+	    	],  
+		    pageSize:10,
+		    usePaper:true,
+		    url:'drill',
+		    parms:{'para.type':'area','para.areaLevel':areaLevel,'para.appId':appId},	
+		    width: '48%',
+		    onSuccess:function(data){
+		    	chartData=data.Rows;
+		    	makeLineChart();
+		    },
+		    onContextmenu : function (parm,e)
+            {
+                appId = parm.data.id;
+                menu.show({ top: e.pageY, left: e.pageX });
+                return false;
+            } 
+		});
+
+}
+/**
  * 初始化方法
  */
 function init(){
@@ -66,10 +156,8 @@ function init(){
 	$("#topRight").html("");
 	menu = $.ligerMenu({ width: 120, items:
         [
-        { text: '返回', click: itemclick,type:'back'},
-        { line: true },
-        { text: '按时间钻取', click: itemclick, type:'time'},
-        { text: '按地区钻取', click: itemclick, type:'area'}
+	        { text: '按时间钻取', click: timeclick,icon: 'prev'},
+	        { text: '按地区钻取', click: areaclick,icon: 'prev'}
         ]
         });
 	
@@ -110,7 +198,7 @@ function makeLineChart(){
     chart = new AmCharts.AmSerialChart();
     chart.pathToImages = "../images/";
     chart.dataProvider = chartData;
-    chart.categoryField = "time";
+    chart.categoryField = cateField;
     chart.startDuration = 1;
     chart.addTitle(appName+"下载趋势图", 16);
     // AXES
@@ -147,7 +235,7 @@ function makeLineChart(){
      */
     chart = new AmCharts.AmSerialChart();
     chart.dataProvider = chartData;
-    chart.categoryField = "time";
+    chart.categoryField = cateField;
     chart.startDuration = 1;
     
     var categoryAxis = chart.categoryAxis;

@@ -8,4 +8,5 @@ import com.isoftstone.bipowercenter.vo.AppDownload;
 
 public interface DownloadService extends SummaryProvider{
 	public List<AppDownload> queryByTime(Map<String,Object> para)throws Exception;
+	public List<AppDownload> queryByArea(Map<String,Object> para)throws Exception;
 }

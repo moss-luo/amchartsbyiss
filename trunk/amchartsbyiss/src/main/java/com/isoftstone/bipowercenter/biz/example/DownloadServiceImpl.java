@@ -12,13 +12,25 @@ public class DownloadServiceImpl implements DownloadService {
 	@Override
 	public int getTotal() {
 		try {
-			return downloadDao.queryByTimeTotal(tempPara);
+			String type="";
+			if(tempPara.get("type")!=null){
+				type = ((String[])tempPara.get("type"))[0];
+			}
+			if(type.equals("area")){
+				return downloadDao.queryByAreaTotal(tempPara);
+			}else{
+				return downloadDao.queryByTimeTotal(tempPara);
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}
 
+	@Override
+	public List<AppDownload> queryByArea(Map<String, Object> para)throws Exception {
+		tempPara = para;
+		return downloadDao.queryByArea(para);
+	}
 	@Override
 	public List<AppDownload> queryByTime(Map<String,Object> para) throws Exception {
 		tempPara = para;
@@ -28,5 +40,6 @@ public class DownloadServiceImpl implements DownloadService {
 	public void setDownloadDao(DownloadDao downloadDao) {
 		this.downloadDao = downloadDao;
 	}
+
 
 }

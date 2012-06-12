@@ -26,7 +26,15 @@ public class DrillAction extends ActionSupport implements SummaryProvider{
 		try {
 			para.put("startNum", pagesize*(page-1)+1);
 			para.put("endNum", pagesize*page);
-			result = downloadService.queryByTime(para);
+			String type="";
+			if(para.get("type")!=null){
+				type = ((String[])para.get("type"))[0];
+			}
+			if(type.equals("area")){
+				result = downloadService.queryByArea(para);
+			}else{
+				result = downloadService.queryByTime(para);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

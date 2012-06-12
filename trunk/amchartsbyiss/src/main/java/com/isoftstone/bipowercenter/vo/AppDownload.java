@@ -11,6 +11,8 @@ public class AppDownload implements Serializable{
 	private String name;
 	private String time;
 	private String timeType;
+	private String area;
+	private String areaType;
 	private String appVersion;
 	private String clientVersion;
 	private String downCount;
@@ -56,5 +58,18 @@ public class AppDownload implements Serializable{
 	public void setDownCount(String downCount) {
 		this.downCount = downCount;
 	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public String getAreaType() {
+		return areaType;
+	}
+	public void setAreaType(String areaType) {
+		this.areaType = areaType;
+	}
+	
 	
 }

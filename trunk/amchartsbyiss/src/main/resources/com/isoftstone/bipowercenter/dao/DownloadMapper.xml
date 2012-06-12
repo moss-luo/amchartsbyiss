@@ -86,4 +86,70 @@
 					</choose>
 		)
 	</select>
+	
+	<select id="queryByArea" parameterType="map" resultType="com.isoftstone.bipowercenter.vo.AppDownload">
+		select * from(
+       		select tab.*,rownum rn from(
+				select t.app_id as id,t.app_name as name,t.app_version as appVersion,sum(t.down_count) as downCount,
+					<choose>
+						<when test="areaLevel!=null and areaLevel[0]==2">
+							(select distinct m.city_nm from t_city_info m where t.area_city=m.city_cd) as area
+								from t_app_download_city t
+						</when>
+						<otherwise>
+							(select distinct m.prov_nm from t_city_info m where t.area_prov=m.prov_cd) as area
+								from t_app_download_prov t
+						</otherwise>
+					</choose>
+					<where>
+						1=1
+						<if test="appId!=null and appId[0]!=''">
+							and t.app_id=#{appId[0]}
+						</if>
+					</where>
+					group by t.app_id, t.app_name, t.app_version
+					<choose>
+						<when test="areaLevel!=null and areaLevel[0]==2">
+							,t.area_city order by downCount desc
+						</when>
+						<otherwise>
+							,t.area_prov order by downCount desc
+						</otherwise>
+					</choose>
+					)tab
+        		WHERE ROWNUM &lt;=#{endNum}
+      		)
+     WHERE RN &gt;=#{startNum}
+	</select>
+	
+	<select id="queryByAreaTotal" parameterType="map" resultType="int">
+		select count(1) from(
+				select t.app_id as id,t.app_name as name,t.app_version as appVersion,sum(t.down_count) as downCount,
+					<choose>
+						<when test="areaLevel!=null and areaLevel[0]==2">
+							(select distinct m.city_nm from t_city_info m where t.area_city=m.city_cd) as area
+								from t_app_download_city t
+						</when>
+						<otherwise>
+							(select distinct m.prov_nm from t_city_info m where t.area_prov=m.prov_cd) as area
+								from t_app_download_prov t
+						</otherwise>
+					</choose>
+					<where>
+						1=1
+						<if test="appId!=null and appId[0]!=''">
+							and t.app_id=#{appId[0]}
+						</if>
+					</where>
+					group by t.app_id, t.app_name, t.app_version
+					<choose>
+						<when test="areaLevel!=null and areaLevel[0]==2">
+							,t.area_city order by downCount  desc
+						</when>
+						<otherwise>
+							,t.area_prov order by downCount desc
+						</otherwise>
+					</choose>
+					)
+	</select>
 </mapper>

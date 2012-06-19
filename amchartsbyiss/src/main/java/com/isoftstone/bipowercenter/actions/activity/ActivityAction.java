@@ -23,7 +23,7 @@ public class ActivityAction implements SummaryProvider,ModelDriven<MarketTask>{
 	private MarketTask task; 
 	
 	@Resource
-	private ActivityService activityService=null;
+	private ActivityService activityService=null; 
 	
 	private int taskId;
 	//分页信息

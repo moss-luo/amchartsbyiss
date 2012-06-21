@@ -111,6 +111,7 @@
                 graph.lineAlpha = 0;
                 graph.fillAlphas = 1;
                 chart.addGraph(graph);
+                chart.addListener("clickGraphItem", function (event) {alert("bar click" ); });
 
                 // WRITE
                 chart.write("chartdiv");

@@ -3,10 +3,14 @@ package com.isoftstone.bipowercenter.biz.example;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.isoftstone.bipowercenter.dao.example.DownloadDao;
 import com.isoftstone.bipowercenter.vo.AppDownload;
-
+@Service
 public class DownloadServiceImpl implements DownloadService {
+	@Autowired
 	private DownloadDao downloadDao;
 	private Map<String,Object> tempPara;
 	@Override

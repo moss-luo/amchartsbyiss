@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import com.isoftstone.bipowercenter.vo.AppDownload;
-
+@Repository
 public class DownloadDaoImpl extends SqlSessionDaoSupport implements DownloadDao {
 
 	@SuppressWarnings("unchecked")

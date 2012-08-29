@@ -5,14 +5,16 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.isoftstone.bipowercenter.dao.activity.ActivityDao;
 import com.isoftstone.bipowercenter.vo.MarketTask;
-
+@Service("service")
 public class ActivityServiceImpl  implements ActivityService {
 	
 	private static Logger log = LoggerFactory.getLogger(ActivityServiceImpl.class);
-	
+	@Autowired
 	private ActivityDao activityDao;
 	private Map<String, Object> tempMap = null;
 	@Override
@@ -46,13 +48,5 @@ public class ActivityServiceImpl  implements ActivityService {
 		activityDao.deleteActivity(taskId);
 	}
 
-	public ActivityDao getActivityDao() {
-		return activityDao;
-	}
-
-	public void setActivityDao(ActivityDao activityDao) {
-		this.activityDao = activityDao;
-	}
-	
 	
 }

@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.struts2.convention.annotation.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.isoftstone.bipowercenter.biz.activity.ActivityService;
 import com.isoftstone.bipowercenter.common.SummaryProvider;
@@ -22,7 +23,7 @@ public class ActivityAction implements SummaryProvider,ModelDriven<MarketTask>{
 	private List<MarketTask> result = null;
 	private MarketTask task; 
 	
-	@Resource
+	@Autowired
 	private ActivityService activityService=null; 
 	
 	private int taskId;

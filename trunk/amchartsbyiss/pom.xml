@@ -78,10 +78,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-    <groupId>org.javassist</groupId>
-    <artifactId>javassist</artifactId>
-    <version>3.16.1-GA</version>
-</dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.16.1-GA</version>
+		</dependency>
 
 
 		<!-- spring dependency begin -->
@@ -232,13 +232,8 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysqlConnectorVersion}</version>
 		</dependency>
-<!-- 
-		<dependency>
-			<groupId>oracle</groupId>
-			<artifactId>oracle-ojdbc</artifactId>
-			<version>6</version>
-		</dependency>
- -->
+		<!-- <dependency> <groupId>oracle</groupId> <artifactId>oracle-ojdbc</artifactId> 
+			<version>6</version> </dependency> -->
 		<!-- database connector end -->
 		<!-- log begin -->
 		<dependency>
@@ -263,7 +258,7 @@
 			<version>${slf4jLog4j12Version}</version>
 		</dependency>
 		<!-- log end -->
-		
+
 		<dependency>
 			<groupId>com.sun</groupId>
 			<artifactId>tools</artifactId>

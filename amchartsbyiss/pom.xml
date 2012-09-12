@@ -11,7 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junitVersion>4.8.2</junitVersion>
-		<springVersion>3.0.6.RELEASE</springVersion>
+		<springVersion>3.0.5.RELEASE</springVersion>
 		<mybatisVersion>3.0.6</mybatisVersion>
 		<aspectjVersion>1.5.3</aspectjVersion>
 		<cglibVersion>2.2</cglibVersion>

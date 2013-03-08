@@ -16,8 +16,6 @@
 		<aspectjVersion>1.5.3</aspectjVersion>
 		<cglibVersion>2.2</cglibVersion>
 		<struts2Version>2.2.3.1</struts2Version>
-		<hibernateCoreVersion>3.6.7.Final</hibernateCoreVersion>
-		<hibernateAnnotationsVersion>3.5.6-Final</hibernateAnnotationsVersion>
 		<mysqlConnectorVersion>5.1.18</mysqlConnectorVersion>
 		<servletVersion>2.5</servletVersion>
 		<jspVersion>2.1</jspVersion>
@@ -232,10 +230,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysqlConnectorVersion}</version>
 		</dependency>
-		<!-- <dependency> <groupId>oracle</groupId> <artifactId>oracle-ojdbc</artifactId> 
-			<version>6</version> </dependency> -->
-		<!-- database connector end -->
-		<!-- log begin -->
+		<dependency>
+			<groupId>oracle</groupId>
+			<artifactId>oracle-ojdbc</artifactId>
+			<version>6</version>
+		</dependency>
+		<!--database connector end -->
+		<!--log begin -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
